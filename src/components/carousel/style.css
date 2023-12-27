@@ -1,0 +1,73 @@
+.carouselCard {
+  display: flex;
+  color: white;
+  border-bottom: 1.2px solid grey;
+  padding-top: 5px;
+}
+.img_avatar {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.post-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 10px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgb(201, 73, 73);
+  font-family: var(--secondarty-font);
+}
+.date {
+  color: rgb(129, 129, 129);
+  font-style: italic;
+  font-size: smaller;
+}
+.post-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.img-post {
+  width: 87%;
+  height: 87%;
+  object-fit: contain;
+  border-radius: 20px;
+  border: 1.2px solid grey;
+  padding-bottom: 0px;
+}
+.logos_bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+}
+.tags {
+  color: aqua;
+  padding-left: 2px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    opacity: 0.7;
+  }
+}
+.logos_bottom div {
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    color: aqua;
+    transition: 0s;
+    transform: scale(1.05);
+  }
+}

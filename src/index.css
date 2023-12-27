@@ -1,0 +1,10 @@
+:root {
+  --Heading-font: "Preahvihear";
+  --secondarty-font: "Nunito";
+  --bg-color: rgb(40, 40, 40);
+  /* rgb(38, 41, 43) */
+}
+
+body {
+  margin: 0;
+}

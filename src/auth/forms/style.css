@@ -1,0 +1,52 @@
+/* signin stylings */
+.signdiv,
+.registerdiv {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url("../../../public/bckgrnd.jpg");
+}
+.userForm {
+  display: flex;
+  background-color: #15172b;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  border-radius: 20px;
+  justify-content: center;
+}
+form {
+  width: 300px;
+
+  margin: 0 auto;
+}
+.err_msg {
+  color: red;
+  font-size: 15px;
+}
+
+/* input styling */
+input {
+  border-radius: 20px;
+  padding: 10px 15px 10px;
+  width: 70%;
+  margin-bottom: 18px;
+}
+label {
+  left: 20px;
+  display: block;
+  width: 80%;
+  color: white;
+  padding-left: 30px;
+  font-size: 15px;
+}
+::placeholder {
+  color: gray;
+}
+
+@media screen and (max-width: 480px) {
+  form {
+    width: 300px;
+  }
+}

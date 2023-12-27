@@ -1,0 +1,66 @@
+body {
+  background-color: var(--bg-color);
+}
+.landing_page {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-image: url("../../public/bckgrnd.jpg");
+}
+.landing_title {
+  font-size: calc(4vw + 4vh + 2vmin);
+  font-family: "Preahvihear";
+  font-weight: 700;
+}
+.landing_btn {
+  padding: 10px;
+  cursor: pointer;
+  background-color: rgb(63, 171, 213);
+  font-size: large;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-family: "Preahvihear";
+  &:hover {
+    color: aliceblue;
+  }
+  &:active {
+    transform: translateY(8px);
+    box-shadow: 0 5px #a49f9f;
+  }
+}
+
+/* RouteLayout  styling  -------*/
+.route_layout {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  height: 100vh;
+}
+.outlet_Renderer {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scroll for the section */
+  padding: 16px;
+  display: flex;
+  flex-grow: 1;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /* Firefox */
+}
+.outlet_Renderer::-webkit-scrollbar {
+  width: 6px; /* google safari */
+}
+@media screen and (max-width: 580px) {
+  .route_layout {
+    display: block;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 780px) {
+  .route_layout {
+    width: 90%;
+  }
+}

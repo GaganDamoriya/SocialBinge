@@ -1,0 +1,28 @@
+.Home-div {
+  background-color: var(--bg-color);
+  width: 100%;
+  color: aliceblue;
+  position: relative;
+}
+.heading_home {
+  padding-left: 20px;
+  font-family: "Segoe UI";
+  font-size: x-large;
+  padding-bottom: 15px;
+  border-bottom: 1.2px solid grey;
+}
+.post_div {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.display_posts_home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 5px;
+}
