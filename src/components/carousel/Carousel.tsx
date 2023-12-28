@@ -16,11 +16,17 @@ interface Blog {
 
 interface CarouselProps {
   blogDta: Blog; // Adjust the type to match your actual type
+  onBookMarkClick: (id: string) => void;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ blogDta }) => {
+const Carousel: React.FC<CarouselProps> = ({ blogDta, onBookMarkClick }) => {
   const [liked, setLiked] = useState(false); //initial state like (blogdata.like)
   const [bookMark, setBookMark] = useState(false); //intial state bookmark (blogdata.bookmark)
+
+  const handleBookMarks = (id: string) => {
+    console.log(id);
+    onBookMarkClick(id);
+  };
 
   return (
     <div className="carouselCard" key={blogDta._id}>
@@ -55,7 +61,13 @@ const Carousel: React.FC<CarouselProps> = ({ blogDta }) => {
           <div className="like_logo" onClick={() => setLiked(!liked)}>
             {liked ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />}
           </div>
-          <div className="bookMark" onClick={() => setBookMark(!bookMark)}>
+          <div
+            className="bookMark"
+            onClick={() => {
+              setBookMark(!bookMark);
+              handleBookMarks(blogDta._id);
+            }}
+          >
             {bookMark ? (
               <FaBookmark style={{ color: "white" }} />
             ) : (

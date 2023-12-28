@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import "./page.css";
 import { postImage, parseTags } from "../constants/PostImg";
 import axios from "axios";
+import { useUser } from "../components/UserContext";
 type FormValue = {
   caption: string;
   location: string;
@@ -15,28 +16,7 @@ type FormValue = {
 
 const CreatePost = () => {
   const [img, setImg] = useState<File | null>(null);
-  const [id, setId] = useState("");
-  useEffect(() => {
-    const token: string | null = localStorage.getItem("token");
-
-    try {
-      if (token) {
-        // Decode the token
-        const payloadBase64 = token.split(".")[1];
-        const decodedPayload = atob(payloadBase64);
-
-        // Parse the JSON-encoded payload
-        const decodedObject = JSON.parse(decodedPayload);
-
-        // Access user information
-        setId(decodedObject.userId);
-      } else {
-        console.warn("Token not found in local storage");
-      }
-    } catch (error) {
-      console.error("Error decoding JWT:", error);
-    }
-  }, [id]); // Include dependencies if needed
+  const { userId } = useUser();
 
   const Blogschema = z.object({
     caption: z.string().min(5).max(60),
@@ -63,7 +43,7 @@ const CreatePost = () => {
       await axios.post("http://localhost:5000/blog/addBlog", {
         caption: data.caption,
         imageUrl: imgURL,
-        user: id,
+        user: userId,
         location: data.location,
         Hashtag: parseTags(data.Hashtag),
         createdAt: date,

@@ -12,12 +12,14 @@ import Explore from "./pages/Explore";
 import People from "./pages/People";
 import SavedPost from "./pages/SavedPost";
 import CreatePost from "./pages/CreatePost";
+import { useUser } from "./components/UserContext";
 
 function App() {
   const [isauthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const handleSignIn = async (userData: any) => {
     setLoading(true);
@@ -33,7 +35,7 @@ function App() {
         localStorage.setItem("token", response.data.token);
         setIsAuthenticated(true);
         setUsername(userData.username);
-
+        setUser(response.data.userId);
         //redirecting........
         setTimeout(() => {
           navigate("/home");

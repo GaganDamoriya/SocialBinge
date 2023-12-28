@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import "./style.css";
 import Carousel from "../../components/carousel/Carousel";
+import { bookMarkPost } from "../../constants/PostImg";
+import { useUser } from "../../components/UserContext";
 
 interface Blog {
   _id: string;
@@ -19,6 +21,7 @@ interface BlogData {
 const Home = ({ blogs: [] }) => {
   const [blogData, setBlogData] = useState<BlogData>({ blogs: [] });
   const [loading, setLoading] = useState(true);
+  const { userId } = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +42,13 @@ const Home = ({ blogs: [] }) => {
     fetchData();
   }, []); // Empty dependency array ensures that this effect runs once when the component mounts
 
+  const handleBookMarkClick = (id: string) => {
+    console.log("blogId : ", id);
+
+    //function to bookMark Blogs
+    bookMarkPost(id, userId);
+  };
+
   return (
     <div className="Home-div">
       <h1 className="heading_home">Home Feed</h1>
@@ -50,7 +60,10 @@ const Home = ({ blogs: [] }) => {
           {blogData && blogData.blogs ? (
             blogData.blogs.map((post) => (
               <div className="post_div" key={post._id}>
-                <Carousel key={post._id} blogDta={post} />
+                <Carousel
+                  blogDta={post}
+                  onBookMarkClick={handleBookMarkClick}
+                />
               </div>
             ))
           ) : (

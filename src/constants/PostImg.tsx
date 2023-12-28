@@ -1,6 +1,12 @@
 import { imgDB } from "../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import axios from "axios";
+
+interface SaveBlogRequest {
+  BlogId: string;
+  userId: string;
+}
 
 export const postImage = async (img: File | null) => {
   if (img!) {
@@ -66,4 +72,25 @@ export const parseTags = (
   const nonEmptyTags = trimmedTags.filter((tag) => tag.length > 0);
 
   return nonEmptyTags;
+};
+
+export const bookMarkPost = async (id: string, userId: null | string) => {
+  //post axios request to add Blog to User.bookMarks
+
+  try {
+    if (!userId) {
+      // Handle the case where userId is not available
+      console.error("User ID not available.");
+      return;
+    }
+
+    const requestData: SaveBlogRequest = {
+      BlogId: id,
+      userId: userId,
+    };
+    await axios.post(`http://localhost:5000/user/save/${userId}`, requestData);
+  } catch (error) {
+    // Handle errors
+    console.error("Error bookmarking post:", error);
+  }
 };
