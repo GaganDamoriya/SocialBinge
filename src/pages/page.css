@@ -64,3 +64,9 @@
     opacity: 0.7;
   }
 }
+
+/* Saved Styling */
+.bookMark_page {
+  height: 100vh;
+  color: white;
+}

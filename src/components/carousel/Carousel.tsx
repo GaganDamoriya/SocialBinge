@@ -3,6 +3,7 @@ import "./style.css";
 import avatar from "../../assets/account_avatr.png";
 import { FaHeart, FaRegHeart, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { formatDate } from "../../constants/PostImg";
+import BookMarkBtn from "../ui/BookMark";
 interface Blog {
   _id: string;
   caption: string;
@@ -16,17 +17,17 @@ interface Blog {
 
 interface CarouselProps {
   blogDta: Blog; // Adjust the type to match your actual type
-  onBookMarkClick: (id: string) => void;
+  savedUserBlog: string[];
+  userID: string | null;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ blogDta, onBookMarkClick }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  blogDta,
+  savedUserBlog,
+  userID,
+}) => {
   const [liked, setLiked] = useState(false); //initial state like (blogdata.like)
   const [bookMark, setBookMark] = useState(false); //intial state bookmark (blogdata.bookmark)
-
-  const handleBookMarks = (id: string) => {
-    console.log(id);
-    onBookMarkClick(id);
-  };
 
   return (
     <div className="carouselCard" key={blogDta._id}>
@@ -61,18 +62,12 @@ const Carousel: React.FC<CarouselProps> = ({ blogDta, onBookMarkClick }) => {
           <div className="like_logo" onClick={() => setLiked(!liked)}>
             {liked ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />}
           </div>
-          <div
-            className="bookMark"
-            onClick={() => {
-              setBookMark(!bookMark);
-              handleBookMarks(blogDta._id);
-            }}
-          >
-            {bookMark ? (
-              <FaBookmark style={{ color: "white" }} />
-            ) : (
-              <FaRegBookmark />
-            )}
+          <div className="bookMark">
+            <BookMarkBtn
+              id={blogDta._id}
+              userBookMark={savedUserBlog}
+              userId={userID}
+            />
           </div>
         </div>
       </div>

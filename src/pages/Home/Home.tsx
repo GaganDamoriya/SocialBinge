@@ -3,6 +3,7 @@ import "./style.css";
 import Carousel from "../../components/carousel/Carousel";
 import { bookMarkPost } from "../../constants/PostImg";
 import { useUser } from "../../components/UserContext";
+import axios from "axios";
 
 interface Blog {
   _id: string;
@@ -21,25 +22,36 @@ interface BlogData {
 const Home = ({ blogs: [] }) => {
   const [blogData, setBlogData] = useState<BlogData>({ blogs: [] });
   const [loading, setLoading] = useState(true);
+  const [userBookmarks, setUserBookmarks] = useState([]);
   const { userId } = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/blog/");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setBlogData(data as BlogData);
+        const response = await axios.get("http://localhost:5000/blog/");
+
+        setBlogData(response.data);
         console.log(blogData);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+    const fetchuserData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/user/${userId}`
+        );
+        console.log(response);
+        console.log(response.data); // User Response data
+        setUserBookmarks(response.data.user.bookMarks);
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    };
 
     fetchData();
+    fetchuserData();
   }, []); // Empty dependency array ensures that this effect runs once when the component mounts
 
   const handleBookMarkClick = (id: string) => {
@@ -48,7 +60,6 @@ const Home = ({ blogs: [] }) => {
     //function to bookMark Blogs
     bookMarkPost(id, userId);
   };
-
   return (
     <div className="Home-div">
       <h1 className="heading_home">Home Feed</h1>
@@ -62,7 +73,8 @@ const Home = ({ blogs: [] }) => {
               <div className="post_div" key={post._id}>
                 <Carousel
                   blogDta={post}
-                  onBookMarkClick={handleBookMarkClick}
+                  savedUserBlog={userBookmarks}
+                  userID={userId}
                 />
               </div>
             ))

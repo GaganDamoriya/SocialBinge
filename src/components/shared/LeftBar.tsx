@@ -46,10 +46,12 @@ const LeftBar = () => {
           })}
         </ul>
       </div>
-      <div className="logout-sidebar">
-        <span>Logout</span>
-        <CiLogout style={{ fontSize: "25px" }} />
-      </div>
+      <Link to={"/signin"}>
+        <div className="logout-sidebar">
+          <span>Logout</span>
+          <CiLogout style={{ fontSize: "25px" }} />
+        </div>
+      </Link>
     </nav>
   );
 };
