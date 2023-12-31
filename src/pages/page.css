@@ -70,3 +70,13 @@
   height: 100vh;
   color: white;
 }
+.removeAnimation {
+  opacity: 0;
+}
+.bookMark_page {
+  background-color: var(--bg-color);
+  width: 100%;
+  color: aliceblue;
+  position: relative;
+  margin: 0 auto;
+}

@@ -19,12 +19,14 @@ interface CarouselProps {
   blogDta: Blog; // Adjust the type to match your actual type
   savedUserBlog: string[];
   userID: string | null;
+  visibilty: (id: string) => void;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
   blogDta,
   savedUserBlog,
   userID,
+  visibilty,
 }) => {
   const [liked, setLiked] = useState(false); //initial state like (blogdata.like)
   const [bookMark, setBookMark] = useState(false); //intial state bookmark (blogdata.bookmark)
@@ -62,7 +64,12 @@ const Carousel: React.FC<CarouselProps> = ({
           <div className="like_logo" onClick={() => setLiked(!liked)}>
             {liked ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />}
           </div>
-          <div className="bookMark">
+          <div
+            className="bookMark"
+            onClick={() => {
+              visibilty(blogDta._id);
+            }}
+          >
             <BookMarkBtn
               id={blogDta._id}
               userBookMark={savedUserBlog}

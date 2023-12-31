@@ -7,7 +7,19 @@ interface SaveBlogRequest {
   BlogId: string;
   userId: string;
 }
-
+interface Blog {
+  _id: string;
+  caption: string;
+  imageUrl: string;
+  location: string;
+  Hashtag: string[];
+  createdAt: Date;
+  user: any;
+  // Add other properties as needed
+}
+interface BlogData {
+  blogs: Blog[];
+}
 export const postImage = async (img: File | null) => {
   if (img!) {
     try {
@@ -93,4 +105,35 @@ export const bookMarkPost = async (id: string, userId: null | string) => {
     // Handle errors
     console.error("Error bookmarking post:", error);
   }
+};
+
+export const userBookmarkArray = async (
+  userId: string | null
+): Promise<string[]> => {
+  try {
+    const response = await axios.get(`http://localhost:5000/user/${userId}`);
+    return response.data.user.bookMarks;
+  } catch (error) {
+    console.error("Error: ", error);
+    return [];
+  }
+};
+
+export const fetchBlog = async (savedBlog: string[]): Promise<BlogData> => {
+  const bookMarkedBlogData: Blog[] = [];
+
+  await Promise.all(
+    savedBlog.map(async (blog_id) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/blog/${blog_id}`
+        );
+        bookMarkedBlogData.push(response.data.blog);
+      } catch (e) {
+        console.log("error", e);
+      }
+    })
+  );
+
+  return { blogs: bookMarkedBlogData };
 };

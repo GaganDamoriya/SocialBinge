@@ -54,12 +54,7 @@ const Home = ({ blogs: [] }) => {
     fetchuserData();
   }, []); // Empty dependency array ensures that this effect runs once when the component mounts
 
-  const handleBookMarkClick = (id: string) => {
-    console.log("blogId : ", id);
-
-    //function to bookMark Blogs
-    bookMarkPost(id, userId);
-  };
+  const handleVisibilty = (id: string) => {};
   return (
     <div className="Home-div">
       <h1 className="heading_home">Home Feed</h1>
@@ -75,6 +70,7 @@ const Home = ({ blogs: [] }) => {
                   blogDta={post}
                   savedUserBlog={userBookmarks}
                   userID={userId}
+                  visibilty={handleVisibilty}
                 />
               </div>
             ))
