@@ -193,7 +193,79 @@ nav a {
 .RightBar_div {
   background-color: var(--bg-color);
   width: 25%;
+  padding-top: 20px;
+  color: white;
   border-left: 0.1px solid grey;
+  font-family: var(--secondarty-font);
+}
+.RightBar_div h2 {
+  padding-left: 20px;
+}
+.User-container {
+  display: grid;
+  grid-row: 1;
+  width: 80%;
+  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1.5rem;
+}
+.user-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.user-img {
+  display: flex;
+  justify-content: center;
+}
+.user-img > img {
+  border: 1.2px solid aqua;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.user-card span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: small;
+  &:hover {
+    text-decoration: underline;
+    color: rgb(197, 72, 72);
+    cursor: pointer;
+  }
+}
+.user-card button {
+  margin: 0 auto;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: rgb(0, 128, 255);
+  color: aliceblue;
+  border: none;
+  font-weight: 500;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+.more-btn {
+  display: flex;
+  margin-top: 2rem;
+  color: blue;
+
+  font-size: small;
+  text-decoration: underline;
+  cursor: pointer;
+  justify-content: center;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    color: aliceblue;
+  }
 }
 
 @media screen and (max-width: 580px) {

@@ -61,7 +61,7 @@ const SavedPost: React.FC = () => {
       <div className="display_posts_home">
         {blogData && blogData.blogs ? (
           blogData.blogs.map((post) => (
-            <div className="post_div">
+            <div className="post_div" key={post._id}>
               <Carousel
                 blogDta={post}
                 savedUserBlog={storeBookmarks}
