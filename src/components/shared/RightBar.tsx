@@ -55,7 +55,7 @@ const RightBar = () => {
           <div>Loading...</div>
         )}
       </div>
-      <span className="more-btn">more.</span>
+      <span className="more-btn">Show more</span>
     </div>
   );
 };

@@ -220,7 +220,7 @@ nav a {
   justify-content: center;
 }
 .user-img > img {
-  border: 1.2px solid aqua;
+  border: 1.2px solid white;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -254,7 +254,7 @@ nav a {
 .more-btn {
   display: flex;
   margin-top: 2rem;
-  color: blue;
+  color: white;
 
   font-size: small;
   text-decoration: underline;
