@@ -137,3 +137,10 @@ export const fetchBlog = async (savedBlog: string[]): Promise<BlogData> => {
 
   return { blogs: bookMarkedBlogData };
 };
+export const truncateString = (inputString: string) => {
+  if (inputString.length <= 20) {
+    return inputString;
+  } else {
+    return inputString.substring(0, 20) + "...";
+  }
+};

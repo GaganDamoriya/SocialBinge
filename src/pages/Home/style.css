@@ -6,15 +6,15 @@
 }
 .heading_home {
   padding-left: 20px;
-  font-family: "Segoe UI";
+  font-family: var(--secondarty-font);
   font-size: x-large;
   padding-bottom: 15px;
   border-bottom: 1.2px solid grey;
 }
 .post_div {
   display: flex;
-  align-items: center;
-  justify-content: start;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 95%;
   margin: 0 auto;
 }

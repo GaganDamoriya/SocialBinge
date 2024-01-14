@@ -1,8 +1,13 @@
+.Create-div {
+  width: 100%;
+  height: 100vh;
+}
 .Create-post {
   width: 100%;
   font-family: var(--secondarty-font);
   color: aliceblue;
   padding: 10px;
+  height: 100%;
 }
 .heading {
   display: flex;
@@ -64,6 +69,35 @@
     opacity: 0.7;
   }
 }
+.switch {
+  display: flex;
+  gap: 5px;
+  float: right;
+}
+
+.post-btn {
+  padding: 5px 8px 5px 8px;
+  background-color: rgb(204, 192, 192);
+  border: none;
+  font-size: medium;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.tag-btn {
+  padding: 5px 10px 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: medium;
+  background-color: rgb(204, 192, 192);
+  color: black;
+
+  cursor: pointer;
+}
+.isActive {
+  background-color: rgb(0, 128, 255);
+  border: 1.2px solid aqua;
+  color: aliceblue;
+}
 
 /* Saved Styling */
 .bookMark_page {
@@ -98,8 +132,76 @@
     border: none;
   }
 }
-.search-icon {
-  width: 30px;
-  height: 30px;
+.input-tab {
+  display: flex;
+  align-items: center;
+  border: 1.2px solid grey;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+.input-tab input {
+  background-color: var(--bg-color);
+  border-radius: 0;
+  outline: none;
+  border: none;
+  margin-bottom: 0;
+
+  color: white;
+}
+.explore-tab {
+  width: 95%;
+  margin: 0 auto;
+}
+.display_search {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-row-gap: 2em;
+  justify-content: space-between;
+}
+
+/* people-page styling */
+
+.people-page {
+  color: white;
+  font-family: "Segoe UI";
+  width: 100%;
+}
+.people-tab {
+  display: flex;
+  gap: 5px;
+  padding: 20px 10px 20px 10px;
+  cursor: pointer;
+  justify-content: space-between;
+  &:hover {
+    opacity: 0.9;
+    border-bottom: 1.2px solid grey;
+    border-top: 1.2px solid grey;
+  }
+}
+.user-detail {
+  display: flex;
+  gap: 10px;
+}
+.user-content {
+  display: flex;
+  flex-direction: column;
+}
+.follow-btn {
+  background-color: rgb(0, 128, 255);
   color: aliceblue;
+  font-size: small;
+  font-weight: 500;
+  border: none;
+  padding: 0px 20px 0px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+@media screen and (max-width: 580px) {
+  .display_search {
+    grid-template-columns: repeat(auto-fill, 120px);
+  }
 }

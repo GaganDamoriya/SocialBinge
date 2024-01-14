@@ -71,3 +71,48 @@
     transform: scale(1.05);
   }
 }
+
+/* Blogcard styling */
+.blogcard {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border: 1.2px solid white;
+  border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  &:hover {
+    border: 2px solid aqua;
+
+    opacity: 0.7;
+  }
+}
+.inside {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 52px;
+  width: 100%;
+  border-radius: 50px;
+  height: 100%;
+}
+.blogcard:hover .inside {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: aliceblue;
+}
+
+@media screen and (max-width: 580px) {
+  .blogcard {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+  }
+  .inside {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+  }
+}
