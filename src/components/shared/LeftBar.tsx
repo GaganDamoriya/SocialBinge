@@ -10,17 +10,17 @@ const LeftBar = () => {
     <nav className="LeftSide-bar">
       <div>
         <div className="Logo">SocialBinge</div>
-        <div className="nav-profile">
-          <Link to={"/profile"}>
+        <Link to={"/home/profile"}>
+          <div className="nav-profile">
             <span>
               <img className="avatar_img" src={avatr} alt="avatar" />
             </span>
-          </Link>
-          <span className="nav-bios">
-            <span className="name"> Gagan Prakash</span>
-            <span className="username">@gaganss</span>
-          </span>
-        </div>
+            <span className="nav-bios">
+              <span className="name"> Gagan Prakash</span>
+              <span className="username">@gaganss</span>
+            </span>
+          </div>
+        </Link>
         <ul className="Navlinks">
           {sidebarLinks.map((nav, i) => {
             const isActive = pathname === nav.route;

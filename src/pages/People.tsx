@@ -57,7 +57,7 @@ const People = () => {
                 <div className="user-detail">
                   <img
                     className="img_avatar"
-                    src={user.avatar == "" ? accountImg : user.avatar}
+                    src={user.avatar === "" ? accountImg : user.avatar}
                     alt="userimg"
                   />
 

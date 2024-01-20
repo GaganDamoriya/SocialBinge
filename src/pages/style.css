@@ -58,6 +58,9 @@ body {
     display: block;
     width: 100%;
   }
+  .outlet_Renderer {
+    padding: 0px;
+  }
 }
 @media screen and (max-width: 780px) {
   .route_layout {

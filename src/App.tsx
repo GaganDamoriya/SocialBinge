@@ -13,6 +13,7 @@ import People from "./pages/People";
 import SavedPost from "./pages/SavedPost";
 import CreatePost from "./pages/CreatePost";
 import { useUser } from "./components/UserContext";
+import ViewProfile from "./pages/ViewProfile/ViewProfile";
 
 function App() {
   const [isauthenticated, setIsAuthenticated] = useState(false);
@@ -99,6 +100,7 @@ function App() {
         {
           <Route path="/home" element={<RouteLayout />}>
             <Route index element={<Home blogs={[]} />} />
+            <Route path="/home/profile" element={<ViewProfile />} />
             <Route path="/home/explore" element={<Explore />} />
             <Route path="/home/all-users" element={<People />} />
             <Route path="/home/saved" element={<SavedPost />} />

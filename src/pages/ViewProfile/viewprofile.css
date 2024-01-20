@@ -1,0 +1,87 @@
+.profile_page {
+  height: 100vh;
+  color: aliceblue;
+  width: 100%;
+  font-family: var(--secondarty-font);
+}
+.head {
+  display: flex;
+  flex-direction: column;
+}
+.background_img {
+  height: 150px;
+  width: 100%;
+  margin-top: 5px;
+  background-color: rgb(64, 59, 59);
+}
+.avatarImg {
+  width: 120px;
+  height: 120px;
+  background-color: var(--bg-color);
+  padding: 2px;
+  border-radius: 50%;
+  position: relative;
+  top: 95px;
+  left: 30px;
+}
+.edit-profile {
+  margin-top: 10px;
+  height: 45px;
+  padding: 15px 15px 0px 0px;
+}
+.edit-profile span {
+  float: right;
+  padding: 5px 12px 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1.2px solid white;
+}
+.personal_details {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.creation-date {
+  margin-bottom: 10px;
+}
+.follower-details {
+  margin-bottom: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.profile_page_navbar {
+  font-family: "Segoe UI";
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 30px 0px 30px;
+}
+.profile_page_navbar span {
+  cursor: pointer;
+  padding: 2px;
+}
+.styling {
+  font-family: "Segoe UI";
+  padding-right: 5px;
+  font-weight: 700;
+}
+.styling-2 {
+  color: grey;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 580px) {
+  .background_img {
+    height: 100px;
+  }
+  .avatarImg {
+    height: 90px;
+    width: 90px;
+    top: 55px;
+  }
+  .profile_page_navbar {
+    padding: 0;
+  }
+}
