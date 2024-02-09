@@ -53,3 +53,18 @@ export const bottombarLinks = [
     label: "Create Post",
   },
 ];
+
+export const naviBar = [
+  {
+    name: "Posts",
+    value: "post",
+  },
+  {
+    name: "Liked",
+    value: "like",
+  },
+  {
+    name: "Saved",
+    value: "saved",
+  },
+];

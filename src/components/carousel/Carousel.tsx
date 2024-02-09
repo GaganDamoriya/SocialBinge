@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./style.css";
 import avatar from "../../assets/account_avatr.png";
-import { FaHeart, FaRegHeart, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { formatDate } from "../../constants/PostImg";
 import BookMarkBtn from "../ui/BookMark";
+import LikePost from "../ui/LikePost";
 interface Blog {
   _id: string;
   caption: string;
@@ -29,7 +29,6 @@ const Carousel: React.FC<CarouselProps> = ({
   visibilty,
 }) => {
   const [liked, setLiked] = useState(false); //initial state like (blogdata.like)
-  const [bookMark, setBookMark] = useState(false); //intial state bookmark (blogdata.bookmark)
 
   return (
     <div className="carouselCard" key={blogDta._id}>
@@ -61,8 +60,9 @@ const Carousel: React.FC<CarouselProps> = ({
           <img className="img-post" src={blogDta.imageUrl} alt="imgurl" />
         </div>
         <div className="logos_bottom">
-          <div className="like_logo" onClick={() => setLiked(!liked)}>
-            {liked ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />}
+          <div>
+            {/* {liked ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />} */}
+            <LikePost id={blogDta._id} userId={userID} />
           </div>
           <div
             className="bookMark"

@@ -14,15 +14,69 @@
   margin-top: 5px;
   background-color: rgb(64, 59, 59);
 }
+.back-img {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  object-fit: contain;
+}
+.onHover {
+  width: 120px;
+  height: 120px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(79, 79, 79, 0.747);
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+}
+
 .avatarImg {
   width: 120px;
   height: 120px;
   background-color: var(--bg-color);
   padding: 2px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
   position: relative;
-  top: 95px;
-  left: 30px;
+  top: -58px;
+  left: 20px;
+  cursor: pointer;
+}
+.avatarImg:hover .onHover {
+  display: flex;
+}
+
+.avatarImg img {
+  width: 99%;
+  height: 99%;
+
+  object-fit: contain;
+  border-radius: 50%;
+  border: 1.2px solid gray;
+}
+.dialog-box {
+  width: 500px;
+  height: 370px;
+  background-color: rgb(78, 76, 76);
+  color: aliceblue;
+  padding: 10px;
+  font-family: var(--secondarty-font);
+  object-fit: contain;
+}
+.dialog-div1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+.dialog-inner {
+  width: 400px;
+  height: 230px;
 }
 .edit-profile {
   margin-top: 10px;
@@ -50,7 +104,21 @@
   display: flex;
   gap: 20px;
 }
-
+.upload-btn {
+  padding: 5px 12px 5px 12px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: rgb(55, 187, 239);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    transform: translateY(4px);
+  }
+}
 .profile_page_navbar {
   font-family: "Segoe UI";
   font-weight: 700;
@@ -60,7 +128,7 @@
 }
 .profile_page_navbar span {
   cursor: pointer;
-  padding: 2px;
+  padding: 2px 8px 2px 8px;
 }
 .styling {
   font-family: "Segoe UI";
@@ -71,17 +139,42 @@
   color: grey;
   font-weight: 400;
 }
-
+.styling-active {
+  color: aqua;
+  font-weight: 600;
+  border-bottom: 2.2px solid aqua;
+}
+.mobile-view {
+  display: none;
+}
 @media screen and (max-width: 580px) {
-  .background_img {
+  .background_img,
+  .back-img {
     height: 100px;
   }
   .avatarImg {
     height: 90px;
     width: 90px;
-    top: 55px;
+    top: -50px;
+    left: 15px;
+  }
+  .onHover {
+    height: 90px;
+    width: 90px;
   }
   .profile_page_navbar {
     padding: 0;
+  }
+  .dialog-box {
+    width: 90%;
+  }
+  .dialog-inner {
+    width: 80%;
+  }
+  .mobile-view {
+    display: flex;
+  }
+  .web-view {
+    display: none;
   }
 }

@@ -4,8 +4,10 @@ import { CiLogout } from "react-icons/ci";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import avatr from "../../assets/acc-image2.webp";
 import { sidebarLinks } from "../../constants/Constant";
+import { useUser } from "../UserContext";
 const LeftBar = () => {
   const { pathname } = useLocation();
+  const { userId } = useUser();
   return (
     <nav className="LeftSide-bar">
       <div>

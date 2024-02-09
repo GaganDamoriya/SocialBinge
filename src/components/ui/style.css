@@ -1,0 +1,12 @@
+.liked-post {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--secondarty-font);
+}
+.activeLikedpost {
+  color: rgb(111, 228, 235);
+}
+.no-likes {
+  font-size: 1.1rem;
+}

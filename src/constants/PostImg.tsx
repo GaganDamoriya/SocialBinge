@@ -118,6 +118,18 @@ export const userBookmarkArray = async (
     return [];
   }
 };
+export const userPostArray = async (
+  userId: string | null
+): Promise<string[]> => {
+  try {
+    const response = await axios.get(`http://localhost:5000/user/${userId}`);
+    return response.data.user.blogs;
+  } catch (error) {
+    console.error("Error: ", error);
+    return [];
+  }
+};
+export const getUser = async () => {};
 
 export const fetchBlog = async (savedBlog: string[]): Promise<BlogData> => {
   const bookMarkedBlogData: Blog[] = [];
