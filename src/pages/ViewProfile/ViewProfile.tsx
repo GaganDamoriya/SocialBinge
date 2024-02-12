@@ -10,6 +10,8 @@ import { FaCamera } from "react-icons/fa";
 import { Dialog } from "primereact/dialog";
 import { getUser, postImage } from "../../constants/PostImg";
 import toast, { Toaster } from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import EditProfile from "../../components/ui/EditProfile";
 
 interface UserProfile {
   _id: string;
@@ -22,23 +24,24 @@ interface UserProfile {
   following: string[]; // Assuming following is an array of string, adjust accordingly
   like: string[]; // Assuming like is an array of string, adjust accordingly
   backImage: String;
+  createdAt: Date;
+  fullName: String;
+  bio: String;
   __v: number;
 }
 
 const ViewProfile = () => {
-  const [dialog, setDialog] = useState(false);
   const [userActivity, setUserActivity] = useState("post");
   const { userId } = useUser();
+  const { id } = useParams();
   const [storeUser, setStoreUser] = useState<UserProfile>();
-  const [cropImage, setCropImage] = useState("");
+  const [dialog, setDialog] = useState(false);
   const [reload, setRelod] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/user/${userId}`
-        );
+        const response = await axios.get(`http://localhost:5000/user/${id}`);
         setStoreUser(response.data.user);
         console.log("storeUser", storeUser);
       } catch (err) {
@@ -48,41 +51,16 @@ const ViewProfile = () => {
     getUser();
   }, [reload]);
 
-  const handleonCrop = (view: any) => {
-    setCropImage(view);
-  };
-  const handleonClose = () => {
-    setCropImage("");
-  };
+  function formatDate(dateString: Date) {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      month: "long",
+      year: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString(undefined, options);
+    return `Joined ${formattedDate}`;
+  }
 
-  const saveImage = async () => {
-    // api request
-    try {
-      const blob = await fetch(cropImage).then((r) => r.blob());
-
-      // Create a File object from the Blob
-      const file = new File([blob], "avatar.jpg", { type: "image/jpeg" });
-
-      // Send the File object to the server
-      const avatar = await postImage(file);
-      console.log(avatar);
-      const res = await axios.patch(
-        `http://localhost:5000/user/update/${userId}`,
-        {
-          avatar: avatar,
-        }
-      );
-      console.log(res);
-      if (res.status == 200) {
-        toast.success("Successfully Updated");
-        setRelod(!reload);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-
-    setDialog(false);
-  };
   return (
     <div className="profile_page">
       <Toaster />
@@ -94,9 +72,9 @@ const ViewProfile = () => {
               {storeUser.blogs.length} posts
             </span>
           </div>
-          <div className="background_img" onClick={() => setDialog(true)}>
+          <div className="background_img">
             <img className="back-img" src="" alt="" />
-            <div className="avatarImg" onClick={() => setDialog(true)}>
+            <div className="avatarImg">
               <div className="onHover">
                 <FaCamera size={"2rem"} />
               </div>
@@ -106,38 +84,26 @@ const ViewProfile = () => {
               />
             </div>
           </div>
-          <Dialog
-            header="UPLOAD IMAGE"
-            visible={dialog}
-            className="dialog-box"
-            onHide={() => setDialog(false)}
-          >
-            <div className="dialog-div1">
-              <div className="dialog-inner">
-                <div className="web-view">
-                  <Avatar
-                    width={400}
-                    height={230}
-                    onCrop={handleonCrop}
-                    onClose={handleonClose}
-                  />
-                </div>
-                <div className="mobile-view">
-                  <Avatar
-                    width={290}
-                    height={200}
-                    onCrop={handleonCrop}
-                    onClose={handleonClose}
-                  />
-                </div>
-              </div>
-              <button className="upload-btn" onClick={saveImage}>
-                Upload
-              </button>
-            </div>
-          </Dialog>
+
           <div className="edit-profile">
-            <span>Edit Profile</span>
+            {id === userId ? (
+              <span onClick={() => setDialog(true)}>Edit Profile</span>
+            ) : (
+              ""
+            )}
+            <Dialog
+              header="Edit Profile"
+              visible={dialog}
+              className="dialog-box"
+              onHide={() => setDialog(false)}
+            >
+              {storeUser && (
+                <EditProfile
+                  user={storeUser}
+                  openDialog={() => setDialog(true)}
+                />
+              )}
+            </Dialog>
           </div>
           <div className="personal_details">
             <span style={{ fontSize: "1.2rem", fontWeight: "600" }}>
@@ -148,7 +114,9 @@ const ViewProfile = () => {
             </span>
           </div>
 
-          <div className="creation-date styling-2">Created At</div>
+          <div className="creation-date styling-2">
+            {formatDate(storeUser.createdAt)}
+          </div>
           <div className="follower-details">
             <span>
               <span className="styling">{storeUser.follower.length}</span>
@@ -179,7 +147,7 @@ const ViewProfile = () => {
         })}
       </div>
       <div>
-        <ProfileDisplayAct page={userActivity} />
+        <ProfileDisplayAct page={userActivity} id={id || ""} />
       </div>
     </div>
   );

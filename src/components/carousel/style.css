@@ -16,13 +16,26 @@
   width: 100%;
   padding-left: 10px;
 }
+
 .user-info {
   display: flex;
   align-items: center;
   gap: 20px;
-  color: rgb(201, 73, 73);
   font-family: var(--secondarty-font);
 }
+a {
+  text-decoration: none;
+}
+.user-info a span {
+  color: rgb(201, 73, 73);
+  font-style: normal;
+  font-size: 1rem;
+  &:hover {
+    opacity: 0.9;
+    text-decoration: underline;
+  }
+}
+
 .date {
   color: rgb(129, 129, 129);
   font-style: italic;

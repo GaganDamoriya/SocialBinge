@@ -118,6 +118,17 @@ export const userBookmarkArray = async (
     return [];
   }
 };
+export const userLikedArray = async (
+  userId: string | null
+): Promise<string[]> => {
+  try {
+    const response = await axios.get(`http://localhost:5000/user/${userId}`);
+    return response.data.user.like;
+  } catch (error) {
+    console.error("Error: ", error);
+    return [];
+  }
+};
 export const userPostArray = async (
   userId: string | null
 ): Promise<string[]> => {

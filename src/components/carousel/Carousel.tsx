@@ -4,6 +4,7 @@ import avatar from "../../assets/account_avatr.png";
 import { formatDate } from "../../constants/PostImg";
 import BookMarkBtn from "../ui/BookMark";
 import LikePost from "../ui/LikePost";
+import { Link } from "react-router-dom";
 interface Blog {
   _id: string;
   caption: string;
@@ -41,7 +42,9 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
       <div className="post-details">
         <div className="user-info">
-          <span>{blogDta.user.username}</span>
+          <Link to={`/home/profile/${blogDta.user.userId}`}>
+            <span className="username">{blogDta.user.username}</span>
+          </Link>
           <span className="date">
             {formatDate(new Date(blogDta.createdAt))}
           </span>

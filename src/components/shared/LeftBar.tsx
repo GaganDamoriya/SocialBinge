@@ -12,7 +12,7 @@ const LeftBar = () => {
     <nav className="LeftSide-bar">
       <div>
         <div className="Logo">SocialBinge</div>
-        <Link to={"/home/profile"}>
+        <Link to={`/home/profile/${userId}`}>
           <div className="nav-profile">
             <span>
               <img className="avatar_img" src={avatr} alt="avatar" />

@@ -100,7 +100,7 @@ function App() {
         {
           <Route path="/home" element={<RouteLayout />}>
             <Route index element={<Home blogs={[]} />} />
-            <Route path="/home/profile" element={<ViewProfile />} />
+            <Route path="/home/profile/:id" element={<ViewProfile />} />
             <Route path="/home/explore" element={<Explore />} />
             <Route path="/home/all-users" element={<People />} />
             <Route path="/home/saved" element={<SavedPost />} />

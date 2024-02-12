@@ -1,18 +1,20 @@
 import React from "react";
 import SavedPost from "../../pages/SavedPost";
 import DisplayUserPost from "../../pages/DisplayUserPost";
+import LikedPostDisplay from "../../pages/LikedPostDisplay";
 
 interface ProfileDisplayActProps {
   page: string;
+  id: string | null;
 }
 
-const ProfileDisplayAct: React.FC<ProfileDisplayActProps> = ({ page }) => {
+const ProfileDisplayAct: React.FC<ProfileDisplayActProps> = ({ page, id }) => {
   return (
     <div>
       {page === "post" ? (
-        <DisplayUserPost />
+        <DisplayUserPost id={id} />
       ) : page === "like" ? (
-        "nothing"
+        <LikedPostDisplay id={id} />
       ) : (
         <SavedPost />
       )}

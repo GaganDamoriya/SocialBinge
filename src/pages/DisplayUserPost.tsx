@@ -15,14 +15,17 @@ interface Blog {
 interface BlogData {
   blogs: Blog[];
 }
+interface DisplayUserPostProps {
+  id: string | null;
+}
 
 //provide userId of user
-const DisplayUserPost = () => {
+const DisplayUserPost: React.FC<DisplayUserPostProps> = ({ id }) => {
   const [blogData, setBlogData] = useState<BlogData>({ blogs: [] });
   const { userId } = useUser();
 
   useEffect(() => {
-    userPostArray(userId)
+    userPostArray(id)
       .then((response: string[]) => {
         fetchBlog(response).then((res: BlogData) => {
           //   console.log("blogsDATA : ", res);

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { truncateString } from "../constants/PostImg";
 import accountImg from "../assets/account_avatr.png";
+import { useNavigate } from "react-router-dom";
 interface User {
   avatar: string;
   bookmarks: string[];
@@ -20,6 +21,7 @@ interface PeopleProps {
 
 const People = () => {
   const [allUser, setAllUser] = useState<PeopleProps>({ userD: [] });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchallUser = async () => {
@@ -53,7 +55,11 @@ const People = () => {
         {allUser.userD && allUser.userD.length > 0 ? (
           allUser.userD.map((user, i) => {
             return (
-              <div className="people-tab" key={i}>
+              <div
+                className="people-tab"
+                onClick={() => navigate(`/home/profile/${user._id}`)}
+                key={i}
+              >
                 <div className="user-detail">
                   <img
                     className="img_avatar"
