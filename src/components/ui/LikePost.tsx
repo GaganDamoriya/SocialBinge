@@ -6,9 +6,10 @@ import axios from "axios";
 interface likePostProps {
   id: string;
   userId: string | null;
+  senderId: string | null;
 }
 
-const LikePost: React.FC<likePostProps> = ({ id, userId }) => {
+const LikePost: React.FC<likePostProps> = ({ id, userId, senderId }) => {
   const [liked, setLiked] = useState(false); //initial state like (blogdata.like)
 
   const likePost = async (id: string, userId: null | string) => {
@@ -22,6 +23,7 @@ const LikePost: React.FC<likePostProps> = ({ id, userId }) => {
       await axios.post(`http://localhost:5000/user/like/${userId}`, {
         BlogId: id,
         userId: userId,
+        senderId: senderId,
       });
     } catch (error) {
       // Handle errors
@@ -37,7 +39,6 @@ const LikePost: React.FC<likePostProps> = ({ id, userId }) => {
   return (
     <div className="liked-post" onClick={handleClick}>
       {liked ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />}
-      
     </div>
   );
 };

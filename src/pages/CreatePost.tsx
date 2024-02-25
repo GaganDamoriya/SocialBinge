@@ -137,7 +137,7 @@ const CreatePost = () => {
               </div>
             </form>
           ) : (
-            <div>TAGGGGGGGGGGGGGGGGgg</div>
+            <div>TAg</div>
           )}
         </div>
       )}

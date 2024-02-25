@@ -3,6 +3,8 @@ import { IoMdPeople } from "react-icons/io";
 import { MdOutlineExplore } from "react-icons/md";
 import { CiBookmark } from "react-icons/ci";
 import { IoCreateOutline } from "react-icons/io5";
+import { IoIosNotifications } from "react-icons/io";
+
 export const sidebarLinks = [
   {
     icon: <FaHome />,
@@ -28,6 +30,11 @@ export const sidebarLinks = [
     icon: <IoCreateOutline />,
     route: "/home/create-post",
     label: "Create Post",
+  },
+  {
+    icon: <IoIosNotifications />,
+    route: "home/notification",
+    label: "Notification",
   },
 ];
 

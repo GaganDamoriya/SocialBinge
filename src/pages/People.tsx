@@ -1,18 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { truncateString } from "../constants/PostImg";
+import { getUser, truncateString } from "../constants/PostImg";
 import accountImg from "../assets/account_avatr.png";
 import { useNavigate } from "react-router-dom";
+import FollowBtn from "../components/ui/FollowBtn";
+import { useUser } from "../components/UserContext";
 interface User {
-  avatar: string;
-  bookmarks: string[];
-  email: string;
-  follower: string[];
-  following: string[];
-  password: string;
-  username: string;
-  __v: number;
   _id: string;
+  username: string;
+  email: string;
+  blogs: string[];
+  bookMarks: string[];
+  avatar: string; // Assuming avatar is a string, adjust accordingly
+  follower: string[]; // Assuming follower is an array of string, adjust accordingly
+  following: string[]; // Assuming following is an array of string, adjust accordingly
+  like: string[]; // Assuming like is an array of string, adjust accordingly
+  backImage: String;
+  createdAt: Date;
+  fullName: String;
+  bio: String;
+  __v: number;
 }
 
 interface PeopleProps {
@@ -21,7 +28,9 @@ interface PeopleProps {
 
 const People = () => {
   const [allUser, setAllUser] = useState<PeopleProps>({ userD: [] });
+  const [currUser, setCurrUser] = useState<User>();
   const navigate = useNavigate();
+  const { userId } = useUser();
 
   useEffect(() => {
     const fetchallUser = async () => {
@@ -30,6 +39,8 @@ const People = () => {
           console.log(res);
           setAllUser({ userD: res.data.allUsers });
         });
+        const user = await getUser(userId);
+        setCurrUser(user);
       } catch (err) {
         console.log("error : ", err);
       }
@@ -39,7 +50,7 @@ const People = () => {
 
   return (
     <div className="people-page">
-      <h2>Connect with People !🤝</h2>
+      <h2>{`hi, ${currUser?.username} Connect with People !🤝`}</h2>
       <p
         style={{
           color: "grey",
@@ -82,7 +93,23 @@ const People = () => {
                     </span>
                   </div>
                 </div>
-                <button className="follow-btn">Follow</button>
+                {/* <button className="follow-btn">Follow</button> */}
+                {/* {currUser?.following &&
+                currUser?.following.filter((id) => id === user._id).length ? (
+                  "following..."
+                ) : (
+                  <FollowBtn
+                    followId={user._id}
+                    userId={userId}
+                    userfollowing={currUser?.following}
+                  />
+                )} */}
+                <FollowBtn
+                  followId={user._id}
+                  userId={userId}
+                  userfollowing={currUser?.following}
+                  onfollow={() => {}}
+                />
               </div>
             );
           })

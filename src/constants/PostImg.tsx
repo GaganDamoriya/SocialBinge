@@ -20,6 +20,15 @@ interface Blog {
 interface BlogData {
   blogs: Blog[];
 }
+interface Notification {
+  _id: string;
+  type: string;
+  postId: string;
+  senderdetail: any;
+}
+interface notiArray {
+  notification: Notification[];
+}
 export const postImage = async (img: File | null) => {
   if (img!) {
     try {
@@ -140,7 +149,16 @@ export const userPostArray = async (
     return [];
   }
 };
-export const getUser = async () => {};
+export const getUser = async (id: string | undefined | null) => {
+  if (id) {
+    try {
+      const response = await axios.get(`http://localhost:5000/user/${id}`);
+      return response.data.user;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+};
 
 export const fetchBlog = async (savedBlog: string[]): Promise<BlogData> => {
   const bookMarkedBlogData: Blog[] = [];
@@ -166,4 +184,21 @@ export const truncateString = (inputString: string) => {
   } else {
     return inputString.substring(0, 20) + "...";
   }
+};
+
+export const fetchNotification = async (notifi: string[]) => {
+  const notificationArr: Notification[] = [];
+
+  await Promise.all(
+    notifi.map(async (id) => {
+      try {
+        const res = await axios.get(`http://localhost:5000/notification/${id}`);
+        notificationArr.push(res.data.notify);
+      } catch (e) {
+        console.log(e);
+      }
+    })
+  );
+
+  return { notification: notificationArr };
 };

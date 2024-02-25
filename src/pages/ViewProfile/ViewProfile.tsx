@@ -12,6 +12,7 @@ import { getUser, postImage } from "../../constants/PostImg";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import EditProfile from "../../components/ui/EditProfile";
+import FollowBtn from "../../components/ui/FollowBtn";
 
 interface UserProfile {
   _id: string;
@@ -35,21 +36,25 @@ const ViewProfile = () => {
   const { userId } = useUser();
   const { id } = useParams();
   const [storeUser, setStoreUser] = useState<UserProfile>();
+  const [currUser, setCurrUser] = useState<UserProfile>();
   const [dialog, setDialog] = useState(false);
   const [reload, setRelod] = useState(false);
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/user/${id}`);
-        setStoreUser(response.data.user);
-        console.log("storeUser", storeUser);
-      } catch (err) {
-        console.log(err);
-      }
+    const fetchUser = async () => {
+      const user = await getUser(id);
+      setStoreUser(user);
+      const UserinSession = await getUser(userId);
+      setCurrUser(UserinSession);
     };
-    getUser();
+    fetchUser();
   }, [reload]);
+  const handlereload = () => {
+    setRelod(!reload);
+  };
+  const handledialog = () => {
+    setDialog(!dialog);
+  };
 
   function formatDate(dateString: Date) {
     const date = new Date(dateString);
@@ -89,7 +94,17 @@ const ViewProfile = () => {
             {id === userId ? (
               <span onClick={() => setDialog(true)}>Edit Profile</span>
             ) : (
-              ""
+              <div
+                className="follow-div"
+                style={{ display: "flex", justifyContent: "end" }}
+              >
+                <FollowBtn
+                  followId={id ? id : ""}
+                  userId={userId}
+                  userfollowing={currUser?.following}
+                  onfollow={handlereload}
+                />
+              </div>
             )}
             <Dialog
               header="Edit Profile"
@@ -100,14 +115,15 @@ const ViewProfile = () => {
               {storeUser && (
                 <EditProfile
                   user={storeUser}
-                  openDialog={() => setDialog(true)}
+                  openDialog={handledialog}
+                  onreload={handlereload}
                 />
               )}
             </Dialog>
           </div>
           <div className="personal_details">
             <span style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              {storeUser.username}
+              {storeUser.fullName ? storeUser.fullName : storeUser.username}
             </span>
             <span className="styling-2" style={{ fontStyle: "italic" }}>
               {storeUser.email}
@@ -116,6 +132,11 @@ const ViewProfile = () => {
 
           <div className="creation-date styling-2">
             {formatDate(storeUser.createdAt)}
+          </div>
+          <div className="bios" style={{ marginBottom: "10px" }}>
+            <span className="styling-2">
+              {storeUser.bio ? storeUser.bio : ""}
+            </span>
           </div>
           <div className="follower-details">
             <span>

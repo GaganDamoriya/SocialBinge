@@ -65,7 +65,11 @@ const Carousel: React.FC<CarouselProps> = ({
         <div className="logos_bottom">
           <div>
             {/* {liked ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />} */}
-            <LikePost id={blogDta._id} userId={userID} />
+            <LikePost
+              id={blogDta._id}
+              userId={userID}
+              senderId={blogDta.user.userId}
+            />
           </div>
           <div
             className="bookMark"

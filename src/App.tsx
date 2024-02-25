@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Landing_page from "./pages/Landing_page";
 import Home from "./pages/Home/Home";
 import axios from "axios";
@@ -13,14 +13,39 @@ import People from "./pages/People";
 import SavedPost from "./pages/SavedPost";
 import CreatePost from "./pages/CreatePost";
 import { useUser } from "./components/UserContext";
+import { jwtDecode } from "jwt-decode";
 import ViewProfile from "./pages/ViewProfile/ViewProfile";
+import { useAuth } from "./components/AuthContext";
+import Notification from "./pages/Notification";
 
 function App() {
-  const [isauthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useUser();
+  const { isAuthenticated, login } = useAuth();
+
+  useEffect(() => {
+    const accessTokenString = localStorage.getItem("Token :");
+    if (accessTokenString !== null) {
+      // Decode the JWT token
+      const decodedToken = jwtDecode(accessTokenString);
+
+      // Log the decoded token to inspect its structure
+      console.log(decodedToken);
+
+      // Access the user ID from the decoded token using the correct property name
+      const userId = (decodedToken as { userId: string }).userId;
+      setUser(userId);
+      if (userId) {
+        login();
+        console.log("logged-in");
+        navigate("/home");
+      }
+      console.log("User ID:", userId);
+    } else {
+      console.log("Token not found in localStorage");
+    }
+  }, []);
 
   const handleSignIn = async (userData: any) => {
     setLoading(true);
@@ -33,9 +58,8 @@ function App() {
       if (response.status === 201) {
         toast.success("Successfully signed In");
         //storing token.............
-        localStorage.setItem("token", response.data.token);
-        setIsAuthenticated(true);
-        setUsername(userData.username);
+        localStorage.setItem("Token :", response.data.token);
+        login();
         setUser(response.data.userId);
         //redirecting........
         setTimeout(() => {
@@ -84,7 +108,7 @@ function App() {
           path="/register"
           element={<Register onRegister={handleRegister} />}
         />
-        {!isauthenticated && (
+        {!isAuthenticated && (
           <Route
             path="/signin"
             element={
@@ -97,16 +121,17 @@ function App() {
           />
         )}
         {/* private route */}
-        {
+        {isAuthenticated && (
           <Route path="/home" element={<RouteLayout />}>
             <Route index element={<Home blogs={[]} />} />
             <Route path="/home/profile/:id" element={<ViewProfile />} />
             <Route path="/home/explore" element={<Explore />} />
             <Route path="/home/all-users" element={<People />} />
+            <Route path="home/notification" element={<Notification />} />
             <Route path="/home/saved" element={<SavedPost />} />
             <Route path="/home/create-post" element={<CreatePost />} />
           </Route>
-        }
+        )}
       </Routes>
     </div>
   );
