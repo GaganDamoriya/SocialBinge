@@ -25,6 +25,7 @@ interface Notification {
   type: string;
   postId: string;
   senderdetail: any;
+  timestamp: string;
 }
 interface notiArray {
   notification: Notification[];

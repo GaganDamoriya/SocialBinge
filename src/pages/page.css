@@ -214,11 +214,17 @@
 .notification-page h2 {
   margin-bottom: 15px;
 }
+.notifi-div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .notifyTab {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: rgb(65, 64, 64);
-  padding: 8px 5px 8px 5px;
+  padding: 8px 10px 8px 5px;
   border-radius: 10px;
   gap: 6px;
 }
@@ -228,6 +234,13 @@
   &:hover {
     text-decoration: underline;
   }
+}
+.date-cr {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: grey;
+  font-style: italic;
 }
 
 @media screen and (max-width: 580px) {

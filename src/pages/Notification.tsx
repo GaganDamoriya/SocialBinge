@@ -9,6 +9,7 @@ interface Notification {
   type: string;
   postId: string;
   senderdetail: any;
+  timestamp: string;
 }
 interface notiArray {
   notification: Notification[];
@@ -25,6 +26,10 @@ const Notification = () => {
       const user = await getUser(userId);
       console.log(user.notifications);
       const res = await fetchNotification(user.notifications);
+      res.notification.sort(
+        (a, b) =>
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      );
       setNotification(res);
       console.log(res);
       console.log("not-->", notification);
@@ -36,7 +41,7 @@ const Notification = () => {
   return (
     <div className="notification-page">
       <h2>Notification</h2>
-      <div>
+      <div className="notifi-div">
         {notification.notification.length > 0 &&
           notification.notification.map((notify) => (
             <NotifyTab notification={notify} />
