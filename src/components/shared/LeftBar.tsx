@@ -4,7 +4,7 @@ import { CiLogout } from "react-icons/ci";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import avatr from "../../assets/acc-image2.webp";
 import { sidebarLinks } from "../../constants/Constant";
-import { getUser } from "../../constants/PostImg";
+import { getUser, truncateString } from "../../constants/PostImg";
 import { useUser } from "../UserContext";
 import { useAuth } from "../AuthContext";
 import { IoIosChatbubbles } from "react-icons/io";
@@ -69,7 +69,9 @@ const LeftBar = () => {
                   ? storeUser?.fullName
                   : storeUser?.username}
               </span>
-              <span className="username">{storeUser?.email}</span>
+              <span className="username">
+                {truncateString(storeUser?.email ? storeUser.email : "")}
+              </span>
             </span>
           </div>
         </Link>

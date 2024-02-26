@@ -42,7 +42,6 @@ const RightBar = () => {
     const currUser = async () => {
       const user = await getUser(userId);
       setCurrUser(user);
-      console.log(user);
     };
     fetchallUser();
     currUser();

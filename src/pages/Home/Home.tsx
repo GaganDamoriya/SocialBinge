@@ -4,6 +4,7 @@ import Carousel from "../../components/carousel/Carousel";
 import { bookMarkPost } from "../../constants/PostImg";
 import { useUser } from "../../components/UserContext";
 import axios from "axios";
+import Loader from "../../components/ui/Loader";
 
 interface Blog {
   _id: string;
@@ -43,8 +44,6 @@ const Home = ({ blogs: [] }) => {
         const response = await axios.get(
           `https://socialbinge-server-gagan-prakash.onrender.com/user/${userId}`
         );
-        console.log(response);
-        console.log(response.data); // User Response data
         setUserBookmarks(response.data.user.bookMarks);
       } catch (error) {
         console.error("Error: ", error);
@@ -61,7 +60,18 @@ const Home = ({ blogs: [] }) => {
       <h1 className="heading_home">Home Feed</h1>
       {/* Render your blog data here */}
       {loading ? (
-        <div>Loading.....</div>
+        // <div>Loading.....</div>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "80vh",
+          }}
+        >
+          <Loader />
+        </div>
       ) : (
         <div className="display_posts_home">
           {blogData && blogData.blogs ? (
@@ -76,7 +86,7 @@ const Home = ({ blogs: [] }) => {
               </div>
             ))
           ) : (
-            <p>Loading...</p>
+            <Loader />
           )}
         </div>
       )}

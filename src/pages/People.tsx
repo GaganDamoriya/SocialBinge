@@ -5,6 +5,7 @@ import accountImg from "../assets/account_avatr.png";
 import { useNavigate } from "react-router-dom";
 import FollowBtn from "../components/ui/FollowBtn";
 import { useUser } from "../components/UserContext";
+import Loader from "../components/ui/Loader";
 interface User {
   _id: string;
   username: string;
@@ -38,7 +39,6 @@ const People = () => {
         await axios
           .get("https://socialbinge-server-gagan-prakash.onrender.com/user/")
           .then((res) => {
-            console.log(res);
             setAllUser({ userD: res.data.allUsers });
           });
         const user = await getUser(userId);
@@ -112,7 +112,17 @@ const People = () => {
             );
           })
         ) : (
-          <div>loading...</div>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "40vh",
+            }}
+          >
+            <Loader />
+          </div>
         )}
       </div>
     </div>

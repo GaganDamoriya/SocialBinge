@@ -24,15 +24,12 @@ const Notification = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const user = await getUser(userId);
-      console.log(user.notifications);
       const res = await fetchNotification(user.notifications);
       res.notification.sort(
         (a, b) =>
           new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
       );
       setNotification(res);
-      console.log(res);
-      console.log("not-->", notification);
     };
 
     fetchUser();
@@ -43,8 +40,10 @@ const Notification = () => {
       <h2>Notification</h2>
       <div className="notifi-div">
         {notification.notification.length > 0 &&
-          notification.notification.map((notify) => (
-            <NotifyTab notification={notify} />
+          notification.notification.map((notify, key) => (
+            <div key={key}>
+              <NotifyTab notification={notify} />
+            </div>
           ))}
       </div>
     </div>

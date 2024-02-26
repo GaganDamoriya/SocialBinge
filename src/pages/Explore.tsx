@@ -31,10 +31,8 @@ const Explore = () => {
           const response = await axios.get(
             `https://socialbinge-server-gagan-prakash.onrender.com/blog/search/${query}`
           );
-          console.log(response);
           setQData(response.data);
           setLoading(false);
-          console.log(qData);
         } catch (error) {
           console.error("Error fetching data:", error);
           setLoading(false);
@@ -69,8 +67,12 @@ const Explore = () => {
           <div>
             {qData.blog && qData.blog.length > 0 ? (
               <div className="display_search">
-                {qData.blog.map((post) => {
-                  return <BlogCard BlogData={post} />;
+                {qData.blog.map((post, id) => {
+                  return (
+                    <div key={id}>
+                      <BlogCard BlogData={post} />
+                    </div>
+                  );
                 })}
               </div>
             ) : (
