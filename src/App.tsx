@@ -50,10 +50,13 @@ function App() {
   const handleSignIn = async (userData: any) => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/user/signin", {
-        username: userData.username,
-        password: userData.password,
-      });
+      const response = await axios.post(
+        "https://socialbinge-server-gagan-prakash.onrender.com/user/signin",
+        {
+          username: userData.username,
+          password: userData.password,
+        }
+      );
 
       if (response.status === 201) {
         toast.success("Successfully signed In");
@@ -82,11 +85,14 @@ function App() {
 
   const handleRegister = async (userData: any) => {
     try {
-      await axios.post("http://localhost:5000/user/register", {
-        username: userData.username,
-        email: userData.email,
-        password: userData.password,
-      });
+      await axios.post(
+        "https://socialbinge-server-gagan-prakash.onrender.com/user/register",
+        {
+          username: userData.username,
+          email: userData.email,
+          password: userData.password,
+        }
+      );
       console.log("sucess_send");
       toast.success("User Succesfully Registered");
       navigate("/signin");

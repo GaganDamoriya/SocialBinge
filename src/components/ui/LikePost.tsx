@@ -20,11 +20,14 @@ const LikePost: React.FC<likePostProps> = ({ id, userId, senderId }) => {
         return;
       }
 
-      await axios.post(`http://localhost:5000/user/like/${userId}`, {
-        BlogId: id,
-        userId: userId,
-        senderId: senderId,
-      });
+      await axios.post(
+        `https://socialbinge-server-gagan-prakash.onrender.com/user/like/${userId}`,
+        {
+          BlogId: id,
+          userId: userId,
+          senderId: senderId,
+        }
+      );
     } catch (error) {
       // Handle errors
       console.error("Error bookmarking post:", error);

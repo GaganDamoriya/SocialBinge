@@ -110,7 +110,10 @@ export const bookMarkPost = async (id: string, userId: null | string) => {
       BlogId: id,
       userId: userId,
     };
-    await axios.post(`http://localhost:5000/user/save/${userId}`, requestData);
+    await axios.post(
+      `https://socialbinge-server-gagan-prakash.onrender.com/user/save/${userId}`,
+      requestData
+    );
   } catch (error) {
     // Handle errors
     console.error("Error bookmarking post:", error);
@@ -121,7 +124,9 @@ export const userBookmarkArray = async (
   userId: string | null
 ): Promise<string[]> => {
   try {
-    const response = await axios.get(`http://localhost:5000/user/${userId}`);
+    const response = await axios.get(
+      `https://socialbinge-server-gagan-prakash.onrender.com/user/${userId}`
+    );
     return response.data.user.bookMarks;
   } catch (error) {
     console.error("Error: ", error);
@@ -132,7 +137,9 @@ export const userLikedArray = async (
   userId: string | null
 ): Promise<string[]> => {
   try {
-    const response = await axios.get(`http://localhost:5000/user/${userId}`);
+    const response = await axios.get(
+      `https://socialbinge-server-gagan-prakash.onrender.com/user/${userId}`
+    );
     return response.data.user.like;
   } catch (error) {
     console.error("Error: ", error);
@@ -143,7 +150,9 @@ export const userPostArray = async (
   userId: string | null
 ): Promise<string[]> => {
   try {
-    const response = await axios.get(`http://localhost:5000/user/${userId}`);
+    const response = await axios.get(
+      `https://socialbinge-server-gagan-prakash.onrender.com/user/${userId}`
+    );
     return response.data.user.blogs;
   } catch (error) {
     console.error("Error: ", error);
@@ -153,7 +162,9 @@ export const userPostArray = async (
 export const getUser = async (id: string | undefined | null) => {
   if (id) {
     try {
-      const response = await axios.get(`http://localhost:5000/user/${id}`);
+      const response = await axios.get(
+        `https://socialbinge-server-gagan-prakash.onrender.com/user/${id}`
+      );
       return response.data.user;
     } catch (err) {
       console.log(err);
@@ -168,7 +179,7 @@ export const fetchBlog = async (savedBlog: string[]): Promise<BlogData> => {
     savedBlog.map(async (blog_id) => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/blog/${blog_id}`
+          `https://socialbinge-server-gagan-prakash.onrender.com/blog/${blog_id}`
         );
         bookMarkedBlogData.push(response.data.blog);
       } catch (e) {
@@ -193,7 +204,9 @@ export const fetchNotification = async (notifi: string[]) => {
   await Promise.all(
     notifi.map(async (id) => {
       try {
-        const res = await axios.get(`http://localhost:5000/notification/${id}`);
+        const res = await axios.get(
+          `https://socialbinge-server-gagan-prakash.onrender.com/notification/${id}`
+        );
         notificationArr.push(res.data.notify);
       } catch (e) {
         console.log(e);

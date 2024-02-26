@@ -37,6 +37,13 @@ const SignIn: React.FC<SignInProps> = ({ onSignIn }) => {
           submitData(data);
         })}
       >
+        <span>
+          <p>
+            can use username - <span style={{ color: "blue" }}>test1</span> ,
+            password -<span style={{ color: "blue" }}>test1</span> or create new
+            from register
+          </p>
+        </span>
         <div className="userForm">
           <label>Username</label>
           <input type="text" placeholder="Username" {...register("username")} />

@@ -28,7 +28,9 @@ const Home = ({ blogs: [] }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/blog/");
+        const response = await axios.get(
+          "https://socialbinge-server-gagan-prakash.onrender.com/blog/"
+        );
 
         setBlogData(response.data);
         setLoading(false);
@@ -39,7 +41,7 @@ const Home = ({ blogs: [] }) => {
     const fetchuserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/user/${userId}`
+          `https://socialbinge-server-gagan-prakash.onrender.com/user/${userId}`
         );
         console.log(response);
         console.log(response.data); // User Response data

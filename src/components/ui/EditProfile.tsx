@@ -65,7 +65,7 @@ const EditProfile: React.FC<EditProfileProps> = ({
       const avatar = await postImage(file);
       console.log(avatar);
       const res = await axios.patch(
-        `http://localhost:5000/user/update/${user._id}`,
+        `https://socialbinge-server-gagan-prakash.onrender.com/user/update/${user._id}`,
         {
           avatar: avatar,
           fullName: fullName,

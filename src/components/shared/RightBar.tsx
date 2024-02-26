@@ -30,9 +30,11 @@ const RightBar = () => {
   useEffect(() => {
     const fetchallUser = async () => {
       try {
-        await axios.get("http://localhost:5000/user/").then((res) => {
-          setAllUser({ userD: res.data.allUsers.slice(0, 4) });
-        });
+        await axios
+          .get("https://socialbinge-server-gagan-prakash.onrender.com/user/")
+          .then((res) => {
+            setAllUser({ userD: res.data.allUsers.slice(0, 4) });
+          });
       } catch (err) {
         console.log("error : ", err);
       }

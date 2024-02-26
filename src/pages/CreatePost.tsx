@@ -44,14 +44,17 @@ const CreatePost = () => {
     //request axios
 
     try {
-      await axios.post("http://localhost:5000/blog/addBlog", {
-        caption: data.caption,
-        imageUrl: imgURL,
-        user: userId,
-        location: data.location,
-        Hashtag: parseTags(data.Hashtag),
-        createdAt: date,
-      });
+      await axios.post(
+        "https://socialbinge-server-gagan-prakash.onrender.com/blog/addBlog",
+        {
+          caption: data.caption,
+          imageUrl: imgURL,
+          user: userId,
+          location: data.location,
+          Hashtag: parseTags(data.Hashtag),
+          createdAt: date,
+        }
+      );
       console.log("sucess_send");
       toast.success("Post sent successfully");
     } catch (e) {

@@ -35,10 +35,12 @@ const People = () => {
   useEffect(() => {
     const fetchallUser = async () => {
       try {
-        await axios.get("http://localhost:5000/user/").then((res) => {
-          console.log(res);
-          setAllUser({ userD: res.data.allUsers });
-        });
+        await axios
+          .get("https://socialbinge-server-gagan-prakash.onrender.com/user/")
+          .then((res) => {
+            console.log(res);
+            setAllUser({ userD: res.data.allUsers });
+          });
         const user = await getUser(userId);
         setCurrUser(user);
       } catch (err) {

@@ -29,7 +29,7 @@ const Explore = () => {
       const search = setTimeout(async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/blog/search/${query}`
+            `https://socialbinge-server-gagan-prakash.onrender.com/blog/search/${query}`
           );
           console.log(response);
           setQData(response.data);

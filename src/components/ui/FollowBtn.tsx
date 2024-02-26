@@ -23,7 +23,7 @@ const FollowBtn: React.FC<FollowBtnProps> = ({
       }
 
       const res = await axios.post(
-        `http://localhost:5000/user/follow/${userId}`,
+        `https://socialbinge-server-gagan-prakash.onrender.com/user/follow/${userId}`,
         {
           userId: userId,
           followId: followId,

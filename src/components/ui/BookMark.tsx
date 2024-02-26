@@ -27,10 +27,13 @@ const BookMarkBtn: React.FC<bookmarkProps> = ({ id, userId, userBookMark }) => {
         return;
       }
 
-      await axios.post(`http://localhost:5000/user/save/${userId}`, {
-        BlogId: id,
-        userId: userId,
-      });
+      await axios.post(
+        `https://socialbinge-server-gagan-prakash.onrender.com/user/save/${userId}`,
+        {
+          BlogId: id,
+          userId: userId,
+        }
+      );
     } catch (error) {
       // Handle errors
       console.error("Error bookmarking post:", error);
