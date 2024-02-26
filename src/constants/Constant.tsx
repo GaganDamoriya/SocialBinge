@@ -33,7 +33,7 @@ export const sidebarLinks = [
   },
   {
     icon: <IoIosNotifications />,
-    route: "home/notification",
+    route: "/home/notification",
     label: "Notification",
   },
 ];
@@ -53,6 +53,11 @@ export const bottombarLinks = [
     icon: <IoMdPeople />,
     route: "/home/all-users",
     label: "People",
+  },
+  {
+    icon: <IoIosNotifications />,
+    route: "/home/notification",
+    label: "notification",
   },
   {
     icon: <IoCreateOutline />,

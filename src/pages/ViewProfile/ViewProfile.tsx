@@ -48,7 +48,7 @@ const ViewProfile = () => {
       setCurrUser(UserinSession);
     };
     fetchUser();
-  }, [reload]);
+  }, [reload, id]);
   const handlereload = () => {
     setRelod(!reload);
   };

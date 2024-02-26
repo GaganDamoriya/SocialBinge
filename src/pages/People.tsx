@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { getUser, truncateString } from "../constants/PostImg";
 import accountImg from "../assets/account_avatr.png";
 import { useNavigate } from "react-router-dom";
@@ -80,7 +80,13 @@ const People = () => {
 
                   <div className="user-content">
                     <span style={{ fontSize: "1.2rem", fontWeight: "700" }}>
-                      {user.username}
+                      {userId === user._id ? (
+                        <span style={{ color: "red" }}>
+                          {user.username}(You)
+                        </span>
+                      ) : (
+                        user.username
+                      )}
                     </span>
                     <span
                       style={{
@@ -93,17 +99,7 @@ const People = () => {
                     </span>
                   </div>
                 </div>
-                {/* <button className="follow-btn">Follow</button> */}
-                {/* {currUser?.following &&
-                currUser?.following.filter((id) => id === user._id).length ? (
-                  "following..."
-                ) : (
-                  <FollowBtn
-                    followId={user._id}
-                    userId={userId}
-                    userfollowing={currUser?.following}
-                  />
-                )} */}
+
                 <FollowBtn
                   followId={user._id}
                   userId={userId}

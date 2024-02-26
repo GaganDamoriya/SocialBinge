@@ -47,7 +47,7 @@ const Topbar = () => {
 
   return (
     <div className="topbar-div">
-      <span className="Logo">
+      <span className="Logo" onClick={() => navigate("/home")}>
         <IoIosChatbubbles className="chatlogo" />
         <span>Social</span>
         <span style={{ color: "rgb(197, 72, 72)" }}>Binge</span>

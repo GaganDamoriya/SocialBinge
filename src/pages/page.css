@@ -166,6 +166,7 @@
   color: white;
   font-family: "Segoe UI";
   width: 100%;
+  height: 100vh;
 }
 .people-tab {
   display: flex;

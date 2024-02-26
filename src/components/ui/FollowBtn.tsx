@@ -38,21 +38,25 @@ const FollowBtn: React.FC<FollowBtnProps> = ({
   };
 
   return (
-    <div>
-      {userfollowing && userfollowing.includes(followId) ? (
-        <span
-          className="styling-2"
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          following..
-        </span>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      {userId !== followId ? (
+        userfollowing && userfollowing.includes(followId) ? (
+          <span
+            className="styling-2"
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            following..
+          </span>
+        ) : (
+          <button className="follow-btn" onClick={handleFollow}>
+            Follow
+          </button>
+        )
       ) : (
-        <button className="follow-btn" onClick={handleFollow}>
-          Follow
-        </button>
+        ""
       )}
       <Toaster />
     </div>

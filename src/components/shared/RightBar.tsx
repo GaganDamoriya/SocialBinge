@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import accAvrt from "../../assets/account_avatr.png";
+import FollowBtn from "../ui/FollowBtn";
+import { useUser } from "../UserContext";
+import { getUser } from "../../constants/PostImg";
 
 interface User {
   avatar: string;
@@ -20,6 +24,9 @@ interface RightBarDetail {
 }
 const RightBar = () => {
   const [allUser, setAllUser] = useState<RightBarDetail>({ userD: [] });
+  const [currUser, setCurrUser] = useState<User>();
+  const [relod, setRelod] = useState(false);
+  const { userId } = useUser();
   useEffect(() => {
     const fetchallUser = async () => {
       try {
@@ -30,8 +37,18 @@ const RightBar = () => {
         console.log("error : ", err);
       }
     };
+    const currUser = async () => {
+      const user = await getUser(userId);
+      setCurrUser(user);
+      console.log(user);
+    };
     fetchallUser();
-  }, []);
+    currUser();
+  }, [relod]);
+
+  const handleRelod = () => {
+    setRelod(!relod);
+  };
 
   return (
     <div className="RightBar_div">
@@ -40,22 +57,31 @@ const RightBar = () => {
         {allUser.userD && allUser.userD.length > 0 ? (
           allUser.userD.map((user) => (
             <div className="user-card" key={user._id}>
-              <div className="user-img">
-                <img
-                  className="img_avatar"
-                  src={user.avatar ? user.avatar : accAvrt}
-                  alt="avatar"
-                />
-              </div>
+              <Link to={`/home/profile/${user._id}`}>
+                <div className="user-img">
+                  <img
+                    className="img_avatar"
+                    src={user.avatar ? user.avatar : accAvrt}
+                    alt="avatar"
+                  />
+                </div>
+              </Link>
               <span>{user.username}</span>
-              <button>Follow</button>
+              <FollowBtn
+                followId={user._id}
+                userId={userId}
+                userfollowing={currUser?.following}
+                onfollow={handleRelod}
+              />
             </div>
           ))
         ) : (
           <div>Loading...</div>
         )}
       </div>
-      <span className="more-btn">Show more</span>
+      <Link to={"/home/all-users"}>
+        <span className="more-btn">Show more</span>
+      </Link>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { sidebarLinks } from "../../constants/Constant";
 import { getUser } from "../../constants/PostImg";
 import { useUser } from "../UserContext";
 import { useAuth } from "../AuthContext";
+import { IoIosChatbubbles } from "react-icons/io";
 
 interface UserProfile {
   _id: string;
@@ -47,7 +48,13 @@ const LeftBar = () => {
   return (
     <nav className="LeftSide-bar">
       <div>
-        <div className="Logo">SocialBinge</div>
+        <Link to={"/home"}>
+          <div className="Logo">
+            <IoIosChatbubbles className="chatlogo" />
+            <span>Social</span>
+            <span style={{ color: "rgb(197, 72, 72)" }}>Binge</span>
+          </div>
+        </Link>
         <Link to={`/home/profile/${userId}`}>
           <div className="nav-profile">
             <img
